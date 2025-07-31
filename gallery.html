@@ -22,6 +22,18 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        .final-message-container {
+    max-height: 400px; /* Set the maximum height of the container */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    z-index: 100;
+}
+        
         body {
             overflow: hidden;
             height: 100vh;
@@ -912,117 +924,99 @@
             }
 
             function showFinalMessage() {
-                // Create modal overlay
-                const overlay = document.createElement('div');
-                overlay.style.position = 'fixed';
-                overlay.style.top = '0';
-                overlay.style.left = '0';
-                overlay.style.width = '100%';
-                overlay.style.height = '100%';
-                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                overlay.style.display = 'flex';
-                overlay.style.justifyContent = 'center';
-                overlay.style.alignItems = 'center';
-                overlay.style.zIndex = '1000';
-                overlay.style.opacity = '0';
-                overlay.style.transition = 'opacity 1s ease';
-                
-                // Create the message container
-                const container = document.createElement('div');
-                container.style.maxWidth = '80%';
-                container.style.width = '600px';
-                container.style.backgroundColor = 'white';
-                container.style.borderRadius = '20px';
-                container.style.padding = '40px';
-                container.style.boxShadow = '0 15px 50px rgba(0, 0, 0, 0.3)';
-                container.style.textAlign = 'center';
-                container.style.position = 'relative';
-                container.style.overflow = 'hidden';
-                container.style.transform = 'scale(0.8)';
-                container.style.transition = 'transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                
-                // Add gradient background
-                container.style.background = 'linear-gradient(135deg, #fff6f9, #f8e6ff)';
-                
-                // Add decorative elements
-                const hearts = ['❤️', '💖', '💕', '💓', '💗', '💘', '💝'];
-                for (let i = 0; i < 20; i++) {
-                    const heart = document.createElement('div');
-                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                    heart.style.position = 'absolute';
-                    heart.style.fontSize = `${Math.random() * 20 + 15}px`;
-                    heart.style.left = `${Math.random() * 100}%`;
-                    heart.style.top = `${Math.random() * 100}%`;
-                    heart.style.opacity = '0.5';
-                    heart.style.transform = 'rotate(' + (Math.random() * 40 - 20) + 'deg)';
-                    heart.style.pointerEvents = 'none';
-                    container.appendChild(heart);
-                }
-                
-                // Add title
-                const title = document.createElement('h2');
-                title.textContent = 'To My and only Helena, my Baby';
-                title.style.fontFamily = "'Dancing Script', cursive";
-                title.style.fontSize = '3rem';
-                title.style.color = 'var(--text-color)';
-                title.style.marginBottom = '20px';
-                title.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
-                container.appendChild(title);
-                
-                // Add final message
-                const message = document.createElement('p');
-                message.innerHTML = `Thank you for being the most incredible person in my world. Every moment with you is a treasure, and I'm so grateful to share this journey with you. I love you more than words can express, and I always will. Here's to creating countless more beautiful memories together!`;
-                message.style.fontSize = '1.5rem';
-                message.style.lineHeight = '1.8';
-                message.style.color = 'var(--text-color)';
-                message.style.marginBottom = '30px';
-                container.appendChild(message);
-                
-                // Add close button
-                const closeButton = document.createElement('button');
-                closeButton.textContent = 'Close with Love';
-                closeButton.style.padding = '12px 30px';
-                closeButton.style.background = 'linear-gradient(to right, var(--primary-color), var(--secondary-color))';
-                closeButton.style.color = 'white';
-                closeButton.style.border = 'none';
-                closeButton.style.borderRadius = '30px';
-                closeButton.style.cursor = 'pointer';
-                closeButton.style.fontSize = '1.2rem';
-                closeButton.style.fontWeight = 'bold';
-                closeButton.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.25)';
-                closeButton.style.transition = 'transform 0.3s ease';
-                container.appendChild(closeButton);
-                
-                // Add hover effect
-                closeButton.addEventListener('mouseenter', () => {
-                    closeButton.style.transform = 'translateY(-5px)';
-                });
-                
-                closeButton.addEventListener('mouseleave', () => {
-                    closeButton.style.transform = '';
-                });
-                
-                // Handle close button click
-                closeButton.addEventListener('click', () => {
-                    overlay.style.opacity = '0';
-                    container.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        document.body.removeChild(overlay);
-                    }, 1000);
-                });
-                
-                // Add container to overlay
-                overlay.appendChild(container);
-                
-                // Add overlay to body
-                document.body.appendChild(overlay);
-                
-                // Animate in
-                setTimeout(() => {
-                    overlay.style.opacity = '1';
-                    container.style.transform = 'scale(1)';
-                }, 100);
-            }
+    // Create modal overlay
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+    overlay.style.zIndex = '1000';
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 1s ease';
+    
+    // Create the message container with scrollable content
+    const container = document.createElement('div');
+    container.classList.add('final-message-container'); // Apply scrollable style here
+    container.style.maxWidth = '80%';
+    container.style.width = '600px';
+    container.style.backgroundColor = 'white';
+    container.style.borderRadius = '20px';
+    container.style.padding = '40px';
+    container.style.boxShadow = '0 15px 50px rgba(0, 0, 0, 0.3)';
+    container.style.textAlign = 'center';
+    container.style.position = 'relative';
+    container.style.overflow = 'auto'; // Enable scrolling inside the container if content overflows
+    
+    // Add title
+    const title = document.createElement('h2');
+    title.textContent = 'To My and only Helena, my Baby';
+    title.style.fontFamily = "'Dancing Script', cursive";
+    title.style.fontSize = '3rem';
+    title.style.color = 'var(--text-color)';
+    title.style.marginBottom = '20px';
+    title.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+    container.appendChild(title);
+    
+    // Add final message
+    const message = document.createElement('p');
+    message.innerHTML = `Thank you for being the most incredible person in my world. Every moment with you is a treasure, and I'm so grateful to share this journey with you. I love you more than words can express, and I always will. Here's to creating countless more beautiful memories together!`;
+    message.style.fontSize = '1.5rem';
+    message.style.lineHeight = '1.8';
+    message.style.color = 'var(--text-color)';
+    message.style.marginBottom = '30px';
+    container.appendChild(message);
+    
+    // Add close button
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'Close with Love';
+    closeButton.style.padding = '12px 30px';
+    closeButton.style.background = 'linear-gradient(to right, var(--primary-color), var(--secondary-color))';
+    closeButton.style.color = 'white';
+    closeButton.style.border = 'none';
+    closeButton.style.borderRadius = '30px';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.fontSize = '1.2rem';
+    closeButton.style.fontWeight = 'bold';
+    closeButton.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.25)';
+    closeButton.style.transition = 'transform 0.3s ease';
+    container.appendChild(closeButton);
+    
+    // Add hover effect
+    closeButton.addEventListener('mouseenter', () => {
+        closeButton.style.transform = 'translateY(-5px)';
+    });
+    
+    closeButton.addEventListener('mouseleave', () => {
+        closeButton.style.transform = '';
+    });
+    
+    // Handle close button click
+    closeButton.addEventListener('click', () => {
+        overlay.style.opacity = '0';
+        container.style.transform = 'scale(0.8)';
+        setTimeout(() => {
+            document.body.removeChild(overlay);
+        }, 1000);
+    });
+    
+    // Add container to overlay
+    overlay.appendChild(container);
+    
+    // Add overlay to body
+    document.body.appendChild(overlay);
+    
+    // Animate in
+    setTimeout(() => {
+        overlay.style.opacity = '1';
+        container.style.transform = 'scale(1)';
+    }, 100);
+}
+
 
             // Function to check the interaction progress
             function checkInteractionProgress() {
